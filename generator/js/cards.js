@@ -351,9 +351,12 @@ function card_element_empty(params, card_data, options) {
 }
 
 var card_element_generators = {
+    aspect: card_element_aspect,
+    consequence: card_element_property,
+    skills: card_element_text,
+    stunt: card_element_description,
     subtitle: card_element_subtitle,
     property: card_element_property,
-    aspect: card_element_aspect,
     rule: card_element_ruler,
     ruler: card_element_ruler,
     boxes: card_element_boxes,
