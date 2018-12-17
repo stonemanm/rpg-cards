@@ -10,7 +10,7 @@
 }
 
 .card.rounded-corners {
-    border-radius: 4px;
+    border-radius: 10px;
 }
 
 .card-content-container {
@@ -66,6 +66,44 @@
     background-color: inherit;
     border-color: inherit;
 }
+
+.card-stress {
+    height: 4mm;
+    margin-top:1mm;
+    padding-left: 2mm;
+    padding-right: 2mm;
+    font-family: Lora, 'Calisto MT', 'Bookman Old Style', Bookman, 'Goudy Old Style', Garamond, 'Hoefler Text', 'Bitstream Charter', Georgia, serif;
+    font-variant: small-caps;
+    font-weight: bold;
+    background-color: inherit;
+    color: white;
+}
+
+.card-stress-icon {
+    width: 4mm;
+    height: 4mm;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: inherit;
+    border-color: inherit;
+    display: inline-block;
+}
+
+.card-stress-icon-container {
+    position: absolute;
+    bottom: 1mm;
+    left: 1mm;
+    border-radius: 1mm;
+    background-color: inherit;
+    border-color: inherit;
+}
+
+.card-li {
+
+    display:inline-block;
+
+}
+
 .card-title-icon-container {
     position: absolute;
     right: -1mm;

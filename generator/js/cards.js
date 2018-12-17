@@ -22,6 +22,8 @@ function card_default_options() {
 function card_default_data() {
     return {
         count: 1,
+        physical_stress: 1,
+        mental_stress: 1,
         title: "New card",
         contents: [],
         tags: []
@@ -154,6 +156,28 @@ function card_element_boxes(params, card_data, options) {
     return result;
 }
 
+function card_element_stress(card_data, options) {
+    var physical = card_data.physical_stress || 0;
+    var mental = card_data.mental_stress || 0;
+
+    var result = "";
+    if (physical != 0 || mental != 0) {
+        result += '<div class="card-stress">';
+        for (j = 0; j < physical; ++j) {
+            result += '    <div class="card-stress-icon' + ' icon-' + 'hearts' + '">';
+            result += '    </div>';
+        }
+        result += '<div style="float:right">'
+        for (j = 0; j < mental; ++j) {
+            result += '    <div class="card-stress-icon' + ' icon-' + 'brain' + '">';
+            result += '    </div>';
+        }
+        result += '</div>'
+        result += '</div>';
+    }
+    return result;
+}
+
 function card_element_property(params, card_data, options) {
     var result = "";
     result += '<div class="card-element card-property-line">';
@@ -240,6 +264,65 @@ function card_element_dndstats(params, card_data, options) {
     return result;
 }
 
+function card_element_aspect(params, card_data, options) {
+    var result = "";
+    result += '<div class="card-element card-property-line">';
+    result += '   <h4 class="card-property-name">- ' + params[0] + '</h4  >';
+    result += '</div>';
+    return result;
+}
+
+function card_element_fatestats(params, card_data, options) {
+    var stats = [10, 10, 10, 0, 0, 0];
+    var mods = [0,0,0,0,0,0];
+    for (var i = 0; i < 3; ++i) {
+        stats[i] = parseInt(params[i], 10) || 0;
+        var mod = Math.floor(((stats[i] - 10) / 2));
+        if (mod >= 0) {
+            mod = "+" + mod;
+        } else {
+            mod = "" + mod;
+        }
+        mods[i] = "&nbsp;(" + mod + ")";
+    }
+
+    var result = "";
+    result += '<table class="card-stats">';
+    result += '    <tbody><tr>';
+    result += '      <th class="card-stats-header">MILD</th>';
+    result += '      <th class="card-stats-header">MODERATE</th>';
+    result += '      <th class="card-stats-header">SEVERE</th>';
+    result += '    </tr>';
+    // result += '    <tr>';
+    // result += '      <td class="card-stats-cell">' + stats[0] + mods[0] + '</td>';
+    // result += '      <td class="card-stats-cell">' + stats[1] + mods[1] + '</td>';
+    // result += '      <td class="card-stats-cell">' + stats[2] + mods[2] + '</td>';
+    // result += '    </tr>';
+    result += '  </tbody>';
+    result += '</table>';
+    return result;
+}
+
+// function card_element_horizontal(params, card_data, options) {
+//     var result = "";
+//     result += '<table class="card-stats">';
+//     result += '    <tbody><tr>';
+//     for (var i = 0; i < 5; ++i) {
+//         if (params[i]) {
+//             result += '      <th class="card-stats-header">' + params[i] '</th>';
+//         }
+//     }
+//     result += '    </tr>';
+//     // result += '    <tr>';
+//     // result += '      <td class="card-stats-cell">' + stats[0] + mods[0] + '</td>';
+//     // result += '      <td class="card-stats-cell">' + stats[1] + mods[1] + '</td>';
+//     // result += '      <td class="card-stats-cell">' + stats[2] + mods[2] + '</td>';
+//     // result += '    </tr>';
+//     result += '  </tbody>';
+//     result += '</table>';
+//     return result;
+// }
+
 function card_element_bullet(params, card_data, options) {
     var result = "";
     result += '<ul class="card-element card-bullet-line">';
@@ -270,11 +353,14 @@ function card_element_empty(params, card_data, options) {
 var card_element_generators = {
     subtitle: card_element_subtitle,
     property: card_element_property,
+    aspect: card_element_aspect,
     rule: card_element_ruler,
     ruler: card_element_ruler,
     boxes: card_element_boxes,
     description: card_element_description,
+    stress: card_element_stress,
     dndstats: card_element_dndstats,
+    fatestats: card_element_fatestats,
     text: card_element_text,
     center: card_element_center,
     justify: card_element_justify,
@@ -333,6 +419,7 @@ function card_generate_front(data, options) {
     result += card_element_icon(data, options);
     result += card_element_title(data, options);
     result += card_generate_contents(data.contents, data, options);
+    result += card_element_stress(data, options);
     result += '</div>';
 
     return result;

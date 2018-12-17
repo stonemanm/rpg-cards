@@ -178,6 +178,8 @@ function ui_update_selected_card() {
         $("#card-title").val(card.title);
         $("#card-title-size").val(card.title_size);
         $("#card-count").val(card.count);
+        $("#card-physical-stress").val(card.physical_stress);
+        $("#card-mental-stress").val(card.mental_stress);
         $("#card-icon").val(card.icon);
         $("#card-icon-back").val(card.icon_back);
 		$("#card-background").val(card.background_image);
@@ -188,6 +190,8 @@ function ui_update_selected_card() {
         $("#card-title").val("");
         $("#card-title-size").val("");
         $("#card-count").val(1);
+        $("#card-physical-stress").val(1);
+        $("#card-mental-stress").val(1);
         $("#card-icon").val("");
         $("#card-icon-back").val("");
 		$("#card-background").val("");
@@ -517,6 +521,8 @@ $(document).ready(function () {
     $("#card-title-size").change(ui_change_card_property);
     $("#card-icon").change(ui_change_card_property);
     $("#card-count").change(ui_change_card_property);
+    $("#card-physical-stress").change(ui_change_card_property);
+    $("#card-mental-stress").change(ui_change_card_property);
     $("#card-icon-back").change(ui_change_card_property);
 	$("#card-background").change(ui_change_card_property);
 	$("#card-color").change(ui_change_card_color);
